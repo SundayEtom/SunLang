@@ -222,15 +222,41 @@ class Value{
 		
 		
 		std::string operator>=(Value val){
-			if(type == val.gettype() && value >= val.get())
-				return "true";
+			switch(type){
+				case Tokens::number:{
+					if(val.gettype() == Tokens::number){
+						double lhs = tonumber();
+						double rhs = val.tonumber();
+							
+						if((lhs > rhs) || (lhs == rhs))
+							return "true";
+						return "false";
+					}
+				}break;
+				
+				default: break;
+			}
+			
 			return "false";
 		}
 		
 		
 		std::string operator<=(Value val){
-			if(type == val.gettype() && value <= val.get())
-				return "true";
+			switch(type){
+				case Tokens::number:{
+					if(val.gettype() == Tokens::number){
+						double lhs = tonumber();
+						double rhs = val.tonumber();
+							
+						if(lhs <= rhs)
+							return "true";
+						return "false";
+					}
+				}break;
+				
+				default: break;
+			}
+			
 			return "false";
 		}
 		

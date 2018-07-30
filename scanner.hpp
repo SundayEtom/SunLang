@@ -58,11 +58,13 @@ class Scanner{
 			
 			if(index < text.size())
 				nexttok = text.at(index);
+			/*
 			if(curtok == '\n'){
 				linecount++;
 				charcount = 1;
 			}
 			else charcount++;
+			*/
 			
 			return true;
 		}
@@ -78,6 +80,21 @@ class Scanner{
 		
 		std::string getlexeme(void){
 			return lexeme;
+		}
+		
+		
+		int getpos(void){
+			return index;
+		}
+		
+		
+		void setpos(int idx){
+			index = idx;
+		}
+		
+		
+		int getfilesize(void){
+			return text.length();
 		}
 		
 		
@@ -160,7 +177,6 @@ class Scanner{
 			else if(curtok == '\n'){
 				advance();
 				lexeme = "";
-				linecount++;
 				return Tokens::newline;
 			}
 			else if(curtok == '/'){
@@ -168,14 +184,27 @@ class Scanner{
 				if(nexttok == '/'){
 					while(curtok != '\n')
 						advance();
-					return Tokens::comment;
+					linecount++;
+					charcount = 1;
+					advance();
+					return scan();
 				}
 				else if(nexttok == '*'){
 					while(advance()){
-						if(curtok == '/' && prevtok == '*')
+						if(curtok == '*' && nexttok == '/'){
+							advance();
+							advance();
 							break;
+						}
+						
+						else if(curtok == '\n'){
+							linecount++;
+							charcount = 1;
+							//advance();
+						}
 					}
-					return Tokens::comment;
+					
+					return scan();
 				}
 				else{
 					lexeme = "/";
@@ -244,16 +273,25 @@ class Scanner{
 				advance();
 				return Tokens::o_bracket;
 			}
-			else if(curtok == '_' && nexttok == 'e'){
+			else if(curtok == '$'){
 				advance();
-				advance();
-				lexeme = "_e";
+				lexeme = "$";
 				return Tokens::seq_end;
+			}
+			else if(curtok == '@'){
+				advance();
+				lexeme = "@";
+				return Tokens::subfunc;
 			}
 			else if(curtok == ')'){
 				lexeme = ')';
 				advance();
 				return Tokens::c_bracket;
+			}
+			else if(curtok == ','){
+				lexeme = ',';
+				advance();
+				return Tokens::comma;
 			}
 			else if(curtok == '&' && nexttok == '&'){
 				lexeme = "&&";
