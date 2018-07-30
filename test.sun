@@ -1,0 +1,57 @@
+﻿/*
+num n1=45; n2=32;
+println n1 n2;
+
+println typeof n2;
+
+array vals = "Sunday" 198.3 'M';
+print typeof vals;
+
+print;
+
+print typeof vals(0) vals(0); print;
+print typeof vals(1) vals(1); print;
+print typeof vals(2) vals(2); print;
+
+//string name = read std string "Enter your name: ";
+//println "Hello " name;
+
+if n1 <= n2 || vals(1) == 198.3;
+{	
+	num sum = vals(1) + 0.3;
+	print "198.3 + 0.3 = " vals(1) + 0.3; print;
+	if sum == 198.6;
+	{	
+		println "Floating point addition works.";
+	}
+}
+
+print;
+
+if vals(2) == 'M';
+{
+	num age = read std "Enter age: ";
+	string str = print "Male: " age " years old\n";
+	print typeof str;
+}
+
+print; println "Done!";
+
+
+array n = "Mastersunny" 67 23 9 0;
+string s = "Mastersunny";
+num n1 = 56;
+char ch = 'S';s obsize n(0) obsize n1 obsize ch obsize n(1);
+
+
+if n1 > 146;  { print "True: n1 is greater than" 146; }
+else if n1 == 56; { print "True: n1 is " n1; }
+else { print "False"; }
+
+*/
+num n = 67;
+println typeof "56" sizeof n;
+if n; { print "n is greater than or equal to 67."; }
+else if n < 30; { print "n is less than 30"; }
+else { print n; }
+print "This should print.";
